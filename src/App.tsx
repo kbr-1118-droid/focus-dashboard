@@ -2,7 +2,9 @@ import { useState, useEffect, useRef, Dispatch, SetStateAction } from "react";
 import { GoogleGenAI } from "@google/genai";
 
 // Gemini API 초기화 (환경 변수에서 키를 안전하게 가져옵니다)
-const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+// VITE_GEMINI_API_KEY가 없으면 빈 문자열로 초기화하여 즉시 크래시 방지 (호출 시 에러 처리)
+const apiKey = import.meta.env.VITE_GEMINI_API_KEY || "";
+const ai = new GoogleGenAI({ apiKey });
 
 const COLORS = {
   bg: "#0d0d18",
